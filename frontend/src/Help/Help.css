@@ -1,0 +1,28 @@
+.gadian{
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    margin-top: 400px;
+    height: 307px;
+}
+.contenthome{
+    padding-top: 284px;
+    color: #000000;
+}
+.gadian{
+    background-image: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+    margin-top: 400px;
+    height: 307px;
+}
+.quest p{
+    padding-top: 10px;
+    padding-left: 110px;
+    padding-bottom: 30px;
+    font-size: 30px;
+}
+.border1{
+    border-bottom: #000000 solid 1px;
+    width: 80%;
+    margin-left: 200px;
+}
+.border1 i {
+    font-size: 30px;
+}

@@ -1,0 +1,55 @@
+.sidebar-infor2 {
+    font-size: 20px;
+}
+
+.sidebar-infor2 h3 {
+    padding-bottom: 20px;
+}
+
+.content-end1 {
+    width: 80%;
+    padding: 30px;
+}
+
+.content-end1 img {
+    width: 100%;
+}
+
+.titleInfo {
+    font-size: 22px;
+    text-align: center;
+    background-color: #F2F2F0;
+    padding: 10px;
+}
+
+.InstructInfo {
+    padding-top: 50px;
+    font-size: 20px;
+}
+
+.InstructInfo h3 {
+    padding-bottom: 15px;
+}
+
+.InstructInfo p {
+    padding-top: 8px;
+    padding-bottom: 9px;
+    text-align: justify;
+}
+
+.InstructInfo a {
+    text-decoration: underline;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-weight: 600;
+}
+
+.InstructInfo h4 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.sidebar-infor2 h3:hover{
+    color: #990000;
+}
+

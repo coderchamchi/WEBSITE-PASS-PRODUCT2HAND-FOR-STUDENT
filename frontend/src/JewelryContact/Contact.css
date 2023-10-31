@@ -1,0 +1,130 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Newsreader";
+    src: url('../../src/assets/font/NewsreaderCaption-Regular.ttf');
+}
+
+.clear { 
+    clear: both;
+}
+
+.flex {
+    display: flex;
+}
+
+html {
+    /* font-family: Newsreader; */
+    color: #321E1E;
+    
+}
+
+
+
+.title2 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    background-color: #F2F2F0;
+}
+
+.title2 p {
+    padding: 15px;
+    font-size: 25px;
+}
+
+.center {
+    text-align: center;
+}
+
+.size {
+    width: 800px;
+    padding: 64px 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.pt30px {
+    padding-top: 30px;
+}
+
+.pb20px {
+    padding-bottom: 20px;
+}
+
+
+
+.hover { 
+    cursor: pointer;
+}
+
+
+
+#contentContact {
+    margin: 35px;
+}
+
+#contentContact p {
+    padding-bottom: 10px;
+    font-size: 20px;
+}
+
+
+
+.ImgContact img{
+    width: 100%;
+}
+
+
+
+.title-end {
+    color: #321E1E;
+    font-size: 25px;
+}
+
+
+.Header1 {
+    padding-bottom: 15px;
+}
+
+.Header1 a {
+    text-decoration: underline;
+}
+
+.Header1 h2 {
+    font-size: 22px;
+}
+
+
+.Header1 .HeaderContent{
+    text-align: center;
+    padding-bottom: 10px;   
+}
+
+.Certification {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    
+}
+
+.Certification2 {
+    text-align: center;
+    padding-top: 5px;
+}
+
+.Certification2 h3 {
+    padding-bottom: 15px;
+}
+
+.Certification3 {
+    text-align: center;
+    padding-top: 25px;
+}
+
+.Certification3 a {
+    text-decoration: underline;
+}

@@ -1,0 +1,258 @@
+#contentBuy {
+    margin-top: 90px;
+}
+
+.BuyHeader {
+    text-align: center;
+    padding: 15px 25px ;
+    font-size: 26px;
+}
+
+.contentBuy2 {
+    margin: 30px 65px ;
+}
+
+.BuyInfo {
+    display: flex;
+    height: 310px;
+    border: 1px solid #B2B2B2;
+    box-shadow: 0 4px 7px -3px;
+}
+
+.Info {
+    display: flex;
+}
+
+.InfoImg {
+    width: 500px;
+    padding: 30px 20px 30px 20px;
+}
+
+.InfoImg img {
+    width: 100%;
+    height: 100%;
+}
+
+.InfoName {
+    font-size: 25px;
+    height: 250px;
+    margin: 30px 20px 30px 20px;
+    width: 635px;
+}
+
+.ISize {
+    padding-top: 18px;
+}
+
+.InfoPrice {
+    font-size: 23px;
+    height: 250px;
+}
+
+.InfoPrice p {
+    font-size: 25px;
+    padding-top: 265px;
+    padding-right: 23px;
+}
+
+.IQuantity {
+    padding-top: 15px;
+    display: flex;
+    cursor: pointer;
+}
+
+.IQuantity p {
+    border: 1px solid #D9D9D9;
+    padding: 4px 16px ;
+}
+
+.IconPriceClose  {
+    color: #B2B2B2;
+    padding: 10px;
+    text-align: end;
+}
+
+.BuyPay {
+    margin-top: 10px;
+    font-size: 23px;
+}
+
+.Pay1 {
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    border-bottom: 1px solid #DBD9D9;
+}
+
+.Pay2 {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #DBD9D9;
+}
+
+.provisionalPrice p {
+    font-size: 25px;
+}
+
+.voucher-icon {
+    display: flex;
+    align-items: center;
+}
+
+.voucher-icon p {
+    opacity: 0.5;
+    font-size: 18px;
+    padding-left: 10px;
+}
+
+.voucher-icon img {
+   width: 50px;
+}
+
+.voucher {
+    font-size: 18px;
+    color: #B31312;
+    background-color: #FEF2F4;
+    cursor: pointer;
+}
+
+.voucher p {
+    padding: 3px 10px;
+}
+
+.BuyTopic {
+    padding-top: 30px;
+    font-size: 20px;
+}
+
+.BuyOrder {
+    display: flex; 
+    justify-content: space-between;
+    padding-top: 20px;
+    align-items: center;
+    font-weight: 600;
+}
+
+.PriceOrder {
+    border-radius: 10px;
+    padding: 10px;
+    width: 45%;
+    font-size: 25px;
+}
+
+.PriceOrder2 {
+    text-align: center;
+    width: 30%;
+    box-shadow: 0 4px 7px -3px;
+}
+
+
+.PriceOrder2 p {
+    cursor: pointer;
+    padding: 15px 0;
+    font-size: 22px;
+    border: none;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #D21312;
+}
+
+.PriceOrder2 p:hover {
+    background-color: #EE0000
+    ;
+}
+
+
+
+.PaymentMeth {
+    display: flex; 
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+
+.method1 {
+    border-radius: 10px;
+    padding: 10px;
+    width: 45%;
+    font-size: 20px;
+    border: 1px solid #DBD9D9;
+    box-shadow: 0 4px 7px -3px;
+    cursor: pointer;
+}
+
+.method2 {
+    border-radius: 10px;
+    padding: 10px;
+    width: 45%;
+    font-size: 20px;
+    border: 1px solid #DBD9D9;
+    box-shadow: 0 4px 7px -3px;
+    cursor: pointer;
+}
+
+.method1:hover {
+    background-color: #EEEEEE			
+    ;
+}
+
+.method1-Top {
+    display: flex;
+    align-items: center;
+}
+
+.mt1-icon img {
+    width: 50px;
+}
+
+.mt2-icon img {
+    width: 50px;
+}
+
+.mt1-title {
+    font-size: 25px;
+    padding-bottom: 5px;
+    padding-left: 10px;
+}
+
+.method1-Bottom {
+    opacity: 0.5;
+    padding-top: 25px;
+    padding-left: 10px;
+}
+
+.Enter-information {
+    padding-top: 20px;
+}
+
+.Enter-Add {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.Enter-Add input {
+    width: 100%;
+    font-size: 20px;
+    padding: 15px;
+    border: none;
+    border-bottom: 1px solid #DBD9D9;
+}
+
+.Enter-Add input::placeholder {
+    opacity: 0.4;
+}
+
+textarea:focus, input:focus{
+    outline: none;
+}
+
+.Validate-Notification-BuyNow {
+    font-size: 20px;
+    padding: 5px;
+}
+
+.Validator-BuyNow {
+    color: #D21312;
+}
+

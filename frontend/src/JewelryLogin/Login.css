@@ -1,0 +1,116 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "Newsreader";
+    src: url('../../src/assets/font/NewsreaderCaption-Regular.ttf');
+}
+
+.clear { 
+    clear: both;
+}
+
+/* 
+html {
+    scroll-behavior: smooth;
+    font-family: Newsreader;
+} */
+
+
+
+.center {
+    text-align: center;
+}
+
+.size {
+    width: 800px;
+    padding: 64px 0;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+
+.pt30px {
+    padding-top: 30px;
+}
+
+
+
+#main{
+    background-image: url('../../src/assets/img/Bìa/BìaContact.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+
+#content {  
+    color: #321E1E;
+}
+
+.content-link:hover {
+    color: #000000
+}
+
+.content-section .section-heading {
+    color: #ffffff;
+    padding-top: 15px;
+    font-size: 30px;
+}
+
+.content-form-email {
+    color: #ccc;
+}
+
+.form-control-dn {
+    padding: 18px;
+    border: 1px solid #b2b2b2;
+    border-radius: 20px;
+    width: 40%;
+    font-size: 15px;
+}
+
+.content-btn-dn button{
+    color: white;
+    background-color: #000000;
+    font-size: 20px;
+    cursor: pointer;
+    font-family: 'Times New Roman', Times, serif;
+}
+
+.content-btn-dn button:hover {
+    background-color: #007a4b
+}
+
+.content-btn-dk a{
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.Validator {
+    color: #D21312;
+}
+
+.Validate-Notification {
+    padding-top: 5px;
+    text-align: left;
+    padding-left: 243px;
+}
+
+
+.form-control-dn {
+    border: 1px solid #ccc; /* Màu border mặc định */
+  }
+  
+  .form-control-dn.error {
+    border-color: red; /* Chuyển sang màu đỏ khi có lỗi */
+  }
+
+  ::placeholder { 
+    font-family: 'Times New Roman', Times, serif;
+  }
