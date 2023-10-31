@@ -53,7 +53,7 @@ function ProductDetails({ username, onLogout, storedUsername }) {
   const [selectedSize, setSelectedSize] = useState(null);
   const location = useLocation();
   const productid = location.state?.id;
-  console.log("adsdad",productid, location.state)
+  console.log("adsdad", productid, location.state)
 
   useEffect(() => {
     if (productid) {
@@ -136,7 +136,7 @@ function ProductDetails({ username, onLogout, storedUsername }) {
                           color: selectedSize === "5" ? "#D21312" : "#000000",
                         }}
                       >
-                        5
+                        M
                       </button>
                     </div>
                     <div className="number">
@@ -148,7 +148,7 @@ function ProductDetails({ username, onLogout, storedUsername }) {
                           color: selectedSize === "6" ? "#D21312" : "#000000",
                         }}
                       >
-                        6
+                        L
                       </button>
                     </div>
                     <div className="number">
@@ -160,7 +160,7 @@ function ProductDetails({ username, onLogout, storedUsername }) {
                           color: selectedSize === "7" ? "#D21312" : "#000000",
                         }}
                       >
-                        7
+                        X
                       </button>
                     </div>
                     <div className="number">
@@ -172,45 +172,7 @@ function ProductDetails({ username, onLogout, storedUsername }) {
                           color: selectedSize === "8" ? "#D21312" : "#000000",
                         }}
                       >
-                        8
-                      </button>
-                    </div>
-                  </div>
-                  <div className="number-bottom flex">
-                    <div className="number">
-                      <button
-                        onClick={() => setSelectedSize("9")}
-                        style={{
-                          backgroundColor:
-                            selectedSize === "9" ? "#FEF2F4" : "#fff",
-                          color: selectedSize === "9" ? "#D21312" : "#000000",
-                        }}
-                      >
-                        9
-                      </button>
-                    </div>
-                    <div className="numberE">
-                      <button
-                        onClick={() => setSelectedSize("10")}
-                        style={{
-                          backgroundColor:
-                            selectedSize === "10" ? "#FEF2F4" : "#fff",
-                          color: selectedSize === "10" ? "#D21312" : "#000000",
-                        }}
-                      >
-                        10
-                      </button>
-                    </div>
-                    <div className="numberE">
-                      <button
-                        onClick={() => setSelectedSize("11")}
-                        style={{
-                          backgroundColor:
-                            selectedSize === "11" ? "#FEF2F4" : "#fff",
-                          color: selectedSize === "11" ? "#D21312" : "#000000",
-                        }}
-                      >
-                        11
+                        XL
                       </button>
                     </div>
                   </div>
