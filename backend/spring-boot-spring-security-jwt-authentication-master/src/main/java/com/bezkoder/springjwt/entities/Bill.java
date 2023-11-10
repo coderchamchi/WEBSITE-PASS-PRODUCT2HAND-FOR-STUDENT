@@ -5,11 +5,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 import javax.persistence.*;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -31,9 +29,9 @@ public class Bill {
     @Column(name="Total")
     private int total;
 
-    @OneToMany(mappedBy = "bill")
-    @JsonIgnore
-    private List<BillDetail> listBillDetail = new ArrayList<>();
+//    @OneToMany(mappedBy = "bill")
+//    @JsonIgnore
+//    private List<BillDetail> listBillDetail = new ArrayList<>();
 
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="Userid")

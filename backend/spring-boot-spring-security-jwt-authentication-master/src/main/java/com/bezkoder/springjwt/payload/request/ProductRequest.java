@@ -12,7 +12,7 @@ import lombok.Setter;
 public class ProductRequest {
     private String productname;
 
-    private String price;
+    private int price;
 
     private String material;
 
@@ -20,7 +20,7 @@ public class ProductRequest {
 
     private String madein;
 
-    private String warehouse;
+    private int warehouse;
 
     private String descriptionproduct;
 
@@ -28,9 +28,9 @@ public class ProductRequest {
 
     private String updatedate;
 
-    private String discount;
+    private int discount;
 
-    private String size;
+    private int size;
 
     private String base64;
 

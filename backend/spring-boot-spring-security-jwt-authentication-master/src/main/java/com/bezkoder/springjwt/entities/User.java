@@ -20,6 +20,7 @@ public class User {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "userid")
+  @JsonIgnore
   private Long userId;
 
   @Column(name = "Username", nullable = false, unique = true)
@@ -30,9 +31,11 @@ public class User {
   private String password;
 
   @Column(name = "Createdate")
+  @JsonIgnore
   private LocalDate created;
 
   @Column(name = "Updatedate")
+  @JsonIgnore
   private LocalDate updated;
 
   @Column(name = "Email", nullable = false, unique = true)
@@ -52,10 +55,17 @@ public class User {
           joinColumns = @JoinColumn(name = "Userid"),
           inverseJoinColumns = @JoinColumn(name = "Roleid")
   )
+  @JsonIgnore
   private Set<Role> listRole = new HashSet<>();
 
   @OneToMany(mappedBy = "user")
+  @JsonIgnore
   private List<Bill> listBill;
+
+//  @OneToOne(mappedBy = "customer")
+//  @JsonIgnore
+//  private ShoppingCart shoppingCart;
+
 
   public User(String username, String encode, String email,LocalDate birthday) {
     this.username = username;

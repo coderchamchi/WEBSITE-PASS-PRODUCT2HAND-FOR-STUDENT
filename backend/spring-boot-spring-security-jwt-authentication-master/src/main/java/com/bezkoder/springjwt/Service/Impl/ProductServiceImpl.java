@@ -2,6 +2,7 @@ package com.bezkoder.springjwt.Service.Impl;
 
 import com.bezkoder.springjwt.Service.ProductService;
 
+import com.bezkoder.springjwt.entities.class4getpicture;
 import com.bezkoder.springjwt.payload.response.ProductRespone;
 import com.bezkoder.springjwt.payload.request.ProductRequest;
 import com.bezkoder.springjwt.entities.Category;
@@ -10,13 +11,14 @@ import com.bezkoder.springjwt.repository.CategoryRepository;
 import com.bezkoder.springjwt.repository.ProductRepository;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ReflectionUtils;
-
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,24 +44,17 @@ public class ProductServiceImpl implements ProductService {
         ProductRespone productDTO = new ProductRespone();
         return productRepository.findById(id)
                 .map(item -> {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-                    String createdate = item.getCreatedate().format(formatter);
-                    String updatedate = item.getUpdatedate().format(formatter);
-                    String price = String.valueOf(item.getPrice());
-                    String warehouse = String.valueOf(item.getWarehouse());
-                    String discount = String.valueOf(item.getDiscount());
-                    String size = String.valueOf(item.getSize());
                     productDTO.setProductname(item.getProductname());
-                    productDTO.setPrice(price);
+                    productDTO.setPrice(item.getPrice());
                     productDTO.setMaterial(item.getMaterial());
                     productDTO.setDescriptionproduct(item.getDescriptionproduct());
-                    productDTO.setCreatedate(createdate);
-                    productDTO.setUpdatedate(updatedate);
+                    productDTO.setCreatedate(item.getCreatedate());
+                    productDTO.setUpdatedate(item.getUpdatedate());
                     productDTO.setBrand(item.getBrand());
                     productDTO.setMadein(item.getMadein());
-                    productDTO.setWarehouse(warehouse);
-                    productDTO.setDiscount(discount);
-                    productDTO.setSize(size);
+                    productDTO.setWarehouse(item.getWarehouse());
+                    productDTO.setDiscount(item.getDiscount());
+                    productDTO.setSize(item.getSize());
                     productDTO.setBase64(item.getBase64());
                     productDTO.setCategory(item.getCategory().getCategoryname());
                     return productDTO;
@@ -67,71 +62,117 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    @Override
+    public ArrayList<Product> getProductbyName(String query) {
+        return productRepository.findProductbyname(query);}
 
+    @Override
+    public ArrayList<Product> getProdcuctbyBrand(String query) {
+        return productRepository.findProductbyBrand(query);}
 
+//    @Override
+//    public boolean saveProduct(ProductRequest productDTO) {
+//        if (ObjectUtils.isNotEmpty(productDTO)) {
+//            try{
+//                Optional<Category> categoryid = categoryRepository.findById(productDTO.getCategoryid());
+//                if(categoryid.isPresent()) {
+//                    Product product = new Product();
+//                    product.setProductname(productDTO.getProductname());
+//                    product.setMaterial(productDTO.getMaterial());
+//                    product.setPrice(productDTO.getPrice());
+//                    product.setDescriptionproduct(productDTO.getDescriptionproduct());
+//                    product.setCreatedate(LocalDate.now());
+//                    product.setUpdatedate(LocalDate.now());
+//                    product.setMadein(productDTO.getMadein());
+//                    product.setBrand(productDTO.getBrand());
+//                    product.setWarehouse(productDTO.getWarehouse());
+//                    product.setSize(productDTO.getSize());
+//                    product.setDiscount(productDTO.getDiscount());
+//                    product.setCategory(categoryid.get());
+//                    try {
+//                        String base64 = product.getbase64fromfolder(productDTO.getProductname());
+//                        product.setBase64(base64);
+//                    } catch (IOException e) {
+//                        product.setBase64(null);
+//                        }
+//                    productRepository.save(product);
+//                    return true;}
+//                return false;}
+//            catch (Exception e){
+//                return false;
+//            }
+//        }
+//        return false;}
     @Override
     public boolean saveProduct(ProductRequest productDTO) {
-        Optional<Category> categoryid = categoryRepository.findById(productDTO.getCategoryid());
-        if(ObjectUtils.isNotEmpty(categoryid))
-        {
-            Integer price = Integer.parseInt(productDTO.getPrice());
-            Integer warehouse = Integer.parseInt(productDTO.getWarehouse());
-            Integer size = Integer.parseInt(productDTO.getSize());
-            Integer discount = Integer.parseInt(productDTO.getDiscount());
-            if (ObjectUtils.isNotEmpty(productDTO)) {
-                Product product = new Product();
-                product.setProductname(productDTO.getProductname());
-                product.setMaterial(productDTO.getMaterial());
-                product.setPrice(price);
-                product.setDescriptionproduct(productDTO.getDescriptionproduct());
-                product.setCreatedate(LocalDate.now());
-                product.setUpdatedate(LocalDate.now());
-                product.setMadein(productDTO.getMadein());
-                product.setBrand(productDTO.getBrand());
-                product.setWarehouse(warehouse);
-                product.setSize(size);
-                product.setDiscount(discount);
-                product.setCategory(categoryid.get());
-                productRepository.save(product);
-                try {
-                    String base64 = product.getbase64fromfolder(productDTO.getProductname());
-                    product.setBase64(base64);
-                } catch (IOException e) {
-                    product.setBase64(null);
+        if (ObjectUtils.isNotEmpty(productDTO)) {
+            try{
+                Optional<Category> categoryid = categoryRepository.findById(productDTO.getCategoryid());
+                if(categoryid.isPresent()) {
+                    Product product = new Product();
+                    product.setProductname(productDTO.getProductname());
+                    product.setMaterial(productDTO.getMaterial());
+                    product.setPrice(productDTO.getPrice());
+                    product.setDescriptionproduct(productDTO.getDescriptionproduct());
+                    product.setCreatedate(LocalDate.now());
+                    product.setUpdatedate(LocalDate.now());
+                    product.setMadein(productDTO.getMadein());
+                    product.setBrand(productDTO.getBrand());
+                    product.setWarehouse(productDTO.getWarehouse());
+                    product.setSize(productDTO.getSize());
+                    product.setDiscount(productDTO.getDiscount());
+                    product.setCategory(categoryid.get());
+                    class4getpicture getpicture = new class4getpicture();
+                    try
+                    {
+                        String base64 = getpicture.getbase64fromfolder2(productDTO.getProductname());
+                        product.setBase64(base64);
+                    }
+                    catch (IOException e)
+                    {
+                        product.setBase64(null);
+                    }
+                    productRepository.save(product);
+                    return true;
                 }
-                productRepository.save(product);
-                return true;
-            }
-            return false;}
-        return false;
-    }
-
+                return false;}
+            catch (Exception e){
+                return false;}
+        }
+        return false;}
     @Override
     public boolean updateProductbyid(Long id, ProductRequest productDTO) {
-        Optional<Category> categoryid = categoryRepository.findById(productDTO.getCategoryid());
         if (ObjectUtils.isNotEmpty(productDTO)){
-            Product product = productRepository.getById(id);
-            if (ObjectUtils.isNotEmpty(product)){
-                product.setProductname(productDTO.getProductname());
-                product.setPrice(Integer.parseInt(productDTO.getPrice()));
-                product.setMaterial(productDTO.getMaterial());
-                product.setDescriptionproduct(productDTO.getDescriptionproduct());
-                product.setUpdatedate(LocalDate.now());
-                product.setDiscount(Integer.parseInt(productDTO.getDiscount()));
-                product.setSize(Integer.parseInt(productDTO.getSize()));
-                product.setCategory(categoryid.get());
+            Optional<Category> categoryid = categoryRepository.findById(productDTO.getCategoryid());
+            if (categoryid.isPresent()) {
                 try {
-                    String base64 = product.getbase64fromfolder(productDTO.getProductname());
-                    product.setBase64(base64);
-                } catch (IOException e) {
-                    product.setBase64(null);
+                Product product = productRepository.getById(id);
+                    product.setProductname(productDTO.getProductname());
+                    product.setPrice(productDTO.getPrice());
+                    product.setMaterial(productDTO.getMaterial());
+                    product.setDescriptionproduct(productDTO.getDescriptionproduct());
+                    product.setUpdatedate(LocalDate.now());
+                    product.setDiscount(productDTO.getDiscount());
+                    product.setSize(productDTO.getSize());
+                    product.setCategory(categoryid.get());
+                    try {
+                        String base64 = product.getbase64fromfolder(productDTO.getProductname());
+                        product.setBase64(base64);
+                    } catch (IOException e) {
+                        product.setBase64(null);
+                    }
+                    productRepository.save(product);
+                    return true;
+                    }
+                    catch (Exception e){
+                        return false;
+                    }
+
                 }
-                productRepository.save(product);
-                return true;
-            }
             return false;
         }
         return false;
+
     }
 
     @Override
@@ -145,21 +186,92 @@ public class ProductServiceImpl implements ProductService {
         Optional<Product> existingProduct = productRepository.findProductId(id);
 
         if(existingProduct.isPresent()){
-        fields.forEach((key, value)->{
+        fields.forEach((key, value)->
+        {
             Field field = ReflectionUtils.findField(Product.class, key);
             field.setAccessible(true);
             ReflectionUtils.setField(field,existingProduct.get(),value);
-
         });
-        return productRepository.save(existingProduct.get());}
+        return productRepository.save(existingProduct.get());
+        }
         return null;
     }
 
+    @Override
+    public List<Product> sortbyproductname(String direction) {
+        if(direction.equals("asc")){
+            return productRepository.findAll(Sort.by("productname").ascending());
+        }
+        else {
+            return productRepository.findAll(Sort.by("productname").descending());
+        }
+    }
+
+    @Override
+    public List<Product> sortbyproductprice(String direction) {
+        if (direction.equals("asc")){
+            return productRepository.findAll(Sort.by("price").ascending());
+        }
+        else
+            return productRepository.findAll(Sort.by("price").descending());
+    }
+
+    @Override
+    public List<Product> sortbyproductnameandprice(String directionname, String directionprice) {
+        if (directionname.equals("asc")){
+            if (directionprice.equals("asc")){
+                return productRepository.findAll(Sort.by("productname").and(Sort.by("price")));
+            }
+            else {
+                return productRepository.findAll(Sort.by("productname").and(Sort.by("price")).descending());
+            }
+        }
+        else {
+            if(directionprice.equals("asc")){
+                return productRepository.findAll(Sort.by("productname").descending().and(Sort.by("price")));
+            }
+            else {
+                return productRepository.findAll(Sort.by("productname").descending().and(Sort.by("price").descending()));
+            }
+        }
+    }
+
+    @Override
+    public List<Product> sortbyproductname_price_discount(String directionname, String directionprice, String directiondiscount) {
+        List<Sort.Order> orderList = new ArrayList<>();
+        if(directionname.equals("asc")){
+            orderList.add(new Sort.Order(Sort.Direction.ASC,"productname"));
+        }
+        else {
+            orderList.add(new Sort.Order(Sort.Direction.DESC,"productname"));
+        }
+        if(directionprice.equals("asc")){
+            orderList.add(new Sort.Order(Sort.Direction.ASC,"price"));
+        }
+        else {
+            orderList.add(new Sort.Order(Sort.Direction.DESC,"price"));
+        }
+        if(directiondiscount.equals("asc")){
+            orderList.add(new Sort.Order(Sort.Direction.ASC,"discount"));
+        }
+        else {
+            orderList.add(new Sort.Order(Sort.Direction.DESC,"discount"));
+        }
+        return productRepository.findAll(Sort.by(orderList));
+    }
+
+    @Override
+    public Page<Product> getPagging(Pageable pageable) {
+        return productRepository.findAll(pageable);
+    }
 
     @Override
     public boolean deleteProductbyid(long id) {
-        productRepository.deleteById(id);
-        return true;
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()){
+            productRepository.deleteById(id);
+            return true;}
+        return false;
     }
 
     @Override
@@ -167,8 +279,6 @@ public class ProductServiceImpl implements ProductService {
         productRepository.deleteAll();
         return true;
     }
-
-
 }
 
 

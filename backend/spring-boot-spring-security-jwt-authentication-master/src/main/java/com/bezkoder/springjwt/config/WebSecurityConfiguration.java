@@ -61,7 +61,7 @@ public class WebSecurityConfiguration {
             .and().formLogin().disable()
             .csrf().disable()
             .exceptionHandling()
-            .authenticationEntryPoint(authenticationEntryPointJwt)//phan xu li neu xac thuc khong thanh cong hoạc loi
+            .authenticationEntryPoint(authenticationEntryPointJwt)
             .accessDeniedHandler(customAccessDeniedHandler)
             .and()
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -70,7 +70,7 @@ public class WebSecurityConfiguration {
             .antMatchers("/api/auth/**").permitAll()
             .antMatchers("/ProjectSJ/Product/**").permitAll()
             .antMatchers("/ProjectSJ/Category/**").permitAll()
-//            .antMatchers("/ProjectSJ/Bill/**").permitAll()
+            .antMatchers("/ProjectSJ/Bill/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .addFilterAfter(authenticationJwtTokenFilter(),

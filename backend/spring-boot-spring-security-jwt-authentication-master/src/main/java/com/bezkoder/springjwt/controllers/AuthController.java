@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import com.bezkoder.springjwt.Service.Impl.UserDetailsServiceImpl;
 import com.bezkoder.springjwt.Service.RoleService;
 import com.bezkoder.springjwt.Service.UserService;
-import com.bezkoder.springjwt.payload.response.ResponseJson;
+import com.bezkoder.springjwt.dto.ResponseJson;
 import com.bezkoder.springjwt.dto.UserDTO;
 import com.bezkoder.springjwt.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -50,7 +51,7 @@ public class AuthController {
   UserDetailsServiceImpl userDetailsService;
 
   @Autowired
-  RoleService roleRepository;
+  RoleService roleService;
 
   @Autowired
   PasswordEncoder encoder;
@@ -61,12 +62,12 @@ public class AuthController {
 @PostMapping("/signin")
 public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest)
 {
-
-
-  Authentication authentication = authenticationManager.authenticate(
+  try {
+    Authentication authentication = authenticationManager.authenticate(
             new UsernamePasswordAuthenticationToken(loginRequest.getEmail(), loginRequest.getPassword()));
 
-  SecurityContextHolder.getContext().setAuthentication(authentication);
+
+    SecurityContextHolder.getContext().setAuthentication(authentication);
 
     String jwt = jwtUtils.generateJwtToken(authentication);
 
@@ -81,8 +82,10 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
             userDetails.getUsername(),
             userDetails.getEmail(),
             roles));
+  } catch (AuthenticationException e) {
+    return ResponseEntity.ok().body(new ResponseJson<>(Boolean.FALSE, HttpStatus.BAD_REQUEST, "User Not Found"));
+  }
 }
-
   @PostMapping("/signup")
   public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
     if (userService.existsByUsername(signUpRequest.getUsername())) {
@@ -96,6 +99,8 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
           .badRequest()
           .body(new MessageResponse("Error: Email is already in use!"));
     }
+
+    // Create new user's account
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     LocalDate birthday = LocalDate.parse(signUpRequest.getBirthday(),formatter);
     User user = new User( signUpRequest.getUsername(),
@@ -103,30 +108,32 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
                           signUpRequest.getEmail(),birthday);
     user.setUpdated(LocalDate.now());
     user.setCreated(LocalDate.now());
-    ArrayList<String> strRoles = signUpRequest.getRole();
+    Set<String> strRoles = signUpRequest.getRole();
     Set<Role> roles = new HashSet<>();
 
     if (strRoles == null) {
-      Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER)
+      Role userRole = roleService.findByRoleName(ERole.ROLE_USER)
           .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
       roles.add(userRole);
-    } else {
+    }
+    else
+    {
       strRoles.forEach(role -> {
         switch (role) {
         case "admin":
-          Role adminRole = roleRepository.findByRoleName(ERole.ROLE_ADMIN)
+          Role adminRole = roleService.findByRoleName(ERole.ROLE_ADMIN)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(adminRole);
 
           break;
         case "mod":
-          Role modRole = roleRepository.findByRoleName(ERole.ROLE_MODERATOR)
+          Role modRole = roleService.findByRoleName(ERole.ROLE_MODERATOR)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(modRole);
 
           break;
         default:
-          Role userRole = roleRepository.findByRoleName(ERole.ROLE_USER)
+          Role userRole = roleService.findByRoleName(ERole.ROLE_USER)
               .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
           roles.add(userRole);
         }
@@ -156,5 +163,15 @@ public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest login
   public ResponseEntity<List<User>> getallUser(){
       List<User> listuser = userService.getalluser();
     return new ResponseEntity<List<User>>(listuser, HttpStatus.OK);
+  }
+  @GetMapping("/user")
+  public ResponseEntity<Object> getuser(){
+    Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+    return new ResponseEntity<>(principal, HttpStatus.OK);
+  }
+  @GetMapping("/userinfo")
+  public ResponseEntity<User> getinfouser(){
+    User user = userService.findUserByUserName();
+    return new ResponseEntity<User>(user, HttpStatus.OK);
   }
 }

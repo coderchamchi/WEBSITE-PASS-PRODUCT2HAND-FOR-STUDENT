@@ -39,15 +39,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User finUserByUserName() {
+    public User findUserByUserName() {
         return userRepository.findUserByUsername(WebUnit.getUsername());
     }
+
     @Override
     public List<User> getalluser(){
         return userRepository.findAll();
     }
-
-
-
 }
 

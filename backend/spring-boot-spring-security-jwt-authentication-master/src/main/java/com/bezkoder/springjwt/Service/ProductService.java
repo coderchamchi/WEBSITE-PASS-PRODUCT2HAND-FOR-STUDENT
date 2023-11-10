@@ -3,6 +3,9 @@ package com.bezkoder.springjwt.Service;
 import com.bezkoder.springjwt.payload.response.ProductRespone;
 import com.bezkoder.springjwt.payload.request.ProductRequest;
 import com.bezkoder.springjwt.entities.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.parameters.P;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,11 +14,16 @@ import java.util.Optional;
 
 public interface ProductService {
     //Get all Product
-    public List<Product> GetAllProduct();
+    List<Product> GetAllProduct();
 
     //Get Product by id
-    public Optional<ProductRespone> getProductbyid(long id);
+    Optional<ProductRespone> getProductbyid(long id);
 
+    //get Product by name
+    ArrayList<Product> getProductbyName(String query);
+
+    //get product by truong/brand ="DUE"
+    ArrayList<Product> getProdcuctbyBrand(String query);
 
     //Create new Product
     boolean saveProduct(ProductRequest productDTO);
@@ -35,5 +43,15 @@ public interface ProductService {
 
     //update by patch
     Product updatebypatch(long id, Map<String, Object> fields);
+
+    List<Product> sortbyproductname(String direction);
+
+    List<Product> sortbyproductprice(String direction);
+
+    List<Product> sortbyproductnameandprice(String directionname, String directionprice);
+
+    List<Product> sortbyproductname_price_discount(String directionname, String directionprice, String directiondiscount);
+
+    Page<Product> getPagging(Pageable pageable);
 
 }

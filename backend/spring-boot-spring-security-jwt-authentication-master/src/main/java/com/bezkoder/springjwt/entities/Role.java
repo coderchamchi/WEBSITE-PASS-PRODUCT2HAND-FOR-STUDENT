@@ -1,5 +1,7 @@
 package com.bezkoder.springjwt.entities;
 
+import com.bezkoder.springjwt.entities.ERole;
+
 import javax.persistence.*;
 
 @Entity

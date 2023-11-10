@@ -6,15 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
-
 import javax.persistence.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Base64;
-import java.util.List;
+
 
 @Getter
 @Setter
@@ -25,7 +23,6 @@ import java.util.List;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private long productid;
 
     @Column(name = "Productname")
@@ -71,9 +68,9 @@ public class Product {
     @JsonIgnore
     private Category category;
 
-    @OneToMany(mappedBy = "product")
-    @JsonIgnore
-    private List<BillDetail> listbilldetail = new ArrayList<>();
+//    @OneToMany(mappedBy = "product")
+//    @JsonIgnore
+//    private List<BillDetail> listbilldetail = new ArrayList<>();
 
     public String getbase64fromfolder(String productname) throws IOException {
         String imagePath = "D:\\INTERN_TMA\\sourecode_Java\\img4Project\\"+productname+".png";
@@ -81,4 +78,7 @@ public class Product {
         String base64Image = Base64.getEncoder().encodeToString(imageBytes);
         return base64Image;
     }
+
+
+
 }

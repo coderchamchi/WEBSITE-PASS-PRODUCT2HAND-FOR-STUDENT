@@ -13,7 +13,7 @@ public interface UserService {
 
     boolean existsByPassword(String password);
 
-    User finUserByUserName();
+    User findUserByUserName();
 
     List<User> getalluser();
 

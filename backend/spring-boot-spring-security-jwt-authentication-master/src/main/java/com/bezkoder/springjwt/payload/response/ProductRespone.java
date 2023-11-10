@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -12,7 +14,7 @@ import lombok.Setter;
 public class ProductRespone {
     private String productname;
 
-    private String price;
+    private int price;
 
     private String material;
 
@@ -20,17 +22,17 @@ public class ProductRespone {
 
     private String madein;
 
-    private String warehouse;
+    private int warehouse;
 
     private String descriptionproduct;
 
-    private String createdate;
+    private LocalDate createdate;
 
-    private String updatedate;
+    private LocalDate updatedate;
 
-    private String discount;
+    private int discount;
 
-    private String size;
+    private int size;
 
     private String base64;
 
